@@ -43,4 +43,16 @@ public class Book {
     public void setYearOfPublish(int yearOfPublish) {
         this.yearOfPublish = yearOfPublish;
     }
+
+    /**
+     *
+     * @param author New author name.
+     * @param title New title.
+     * @param yearOfPublish New year of publish.
+     */
+    public Book(String author, String title, int yearOfPublish) {
+        this.author = author;
+        this.title = title;
+        this.yearOfPublish = yearOfPublish;
+    }
 }
