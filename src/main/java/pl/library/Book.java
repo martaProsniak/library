@@ -25,7 +25,7 @@ public class Book {
      */
     public Book() {
     }
-
+    
     /**
      * Book constructor with parameters
      * @param title New book title

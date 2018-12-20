@@ -39,7 +39,7 @@ public class Main {
                     System.out.println("Enter book title");
                     String title = scanner.next();
                     System.out.println("Enter year of publish");
-                    int year = scanner.nextInt();
+                    String year = scanner.next();
                     //Create new book:
                     Book book = new Book(author, title, year);
                     //Assign local variables to global
