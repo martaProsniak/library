@@ -20,6 +20,24 @@ public class Book {
      */
     private int yearOfPublish;
 
+    /**
+     * Book constructor without parameters
+     */
+    public Book() {
+    }
+
+    /**
+     * Book constructor with parameters
+     * @param title New book title
+     * @param author New book author
+     * @param yearOfPublish New year of publish
+     */
+    public Book(String title, String author, int yearOfPublish) {
+        this.title = title;
+        this.author = author;
+        this.yearOfPublish = yearOfPublish;
+    }
+
     public String getTitle() {
         return title;
     }
