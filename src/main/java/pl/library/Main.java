@@ -16,23 +16,62 @@ public class Main {
 
     public static  void main (String [] args) {
 
-        System.out.println("Hello world!");
+        System.out.println("Book catalog");
 
         //Add Scanner for reading input
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter book author");
-        String author = scanner.next();
-        System.out.println("Enter book title");
-        String title = scanner.next();
-        System.out.println("Enter year of publish (YYYY)");
-        int year = scanner.nextInt();
+        boolean running = true;
 
-        Book book1 = new Book(author, title, year);
+        Book[] books = new Book[10]; //New array to store books
 
-        System.out.println(book1.getAuthor());
-        System.out.println(book1.getTitle());
-        System.out.println(book1.getYearOfPublish());
+        while (running) {
+
+            int command = scanner.nextInt();//Read next user command
+
+            switch (command) {
+                case 1: { //Add new book
+                    //Create local variables for author, title and year
+                    System.out.println("Enter book index");
+                    int index = scanner.nextInt();
+                    System.out.println("Enter book author");
+                    String author = scanner.next();
+                    System.out.println("Enter book title");
+                    String title = scanner.next();
+                    System.out.println("Enter year of publish");
+                    String year = scanner.next();
+                    //Create new book:
+                    Book book = new Book(author, title, year);
+                    //Assign local variables to global
+                    books[index] = book;
+
+                    break;
+                }
+
+                case 2: { //Print info about book
+
+                    System.out.println("Enter book index");
+                    int index = scanner.nextInt(); //Read book index to be printed
+                    System.out.println("Author: " + books[index].getAuthor());
+                    System.out.println("Title: " + books[index].getTitle());
+                    System.out.println("Year of publish: " + books[index].getYearOfPublish());
+
+                    break;
+                }
+
+                case 0: { //Quit
+                    running = false;
+                    break;
+                }
+
+                default: {
+                    System.out.println("Valid commands are:\n" +
+                        "1 - add\n" +
+                        "2 - print\n" +
+                        "0 - quit\n");
+                }
+            }
+        }
 
     }
 
