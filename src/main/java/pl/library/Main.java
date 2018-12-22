@@ -58,7 +58,9 @@ public class Main {
 
                     break;
                 }
-
+                /*When the whole table won't be filled the error will occur
+                NullPointer
+                 */
                 case 3: { //Print the whole library
                         for (Book b : books) { //for all books in books array
                             System.out.println(b.getAuthor() +
