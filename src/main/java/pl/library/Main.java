@@ -23,7 +23,7 @@ public class Main {
 
         boolean running = true;
 
-        Book[] books = new Book[10]; //New array to store books
+        Book[] books = new Book[3]; //New array to store books
 
         while (running) {
 
@@ -48,7 +48,7 @@ public class Main {
                     break;
                 }
 
-                case 2: { //Print info about book
+                case 2: { //Print info about chosen book
 
                     System.out.println("Enter book index");
                     int index = scanner.nextInt(); //Read book index to be printed
@@ -59,6 +59,15 @@ public class Main {
                     break;
                 }
 
+                case 3: { //Print the whole library
+                        for (Book b : books) { //for all books in books array
+                            System.out.println(b.getAuthor() +
+                                    " " + b.getTitle() +
+                                    " " + b.getYearOfPublish());
+                        }
+                        break;
+                    }
+
                 case 0: { //Quit
                     running = false;
                     break;
@@ -67,7 +76,8 @@ public class Main {
                 default: {
                     System.out.println("Valid commands are:\n" +
                         "1 - add\n" +
-                        "2 - print\n" +
+                        "2 - print book\n" +
+                        "3 - print the whole library\n" +
                         "0 - quit\n");
                 }
             }
