@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * Array for all books
+     * Array for all shelves
      */
-    private static Shelf[] shelves = new Shelf[2];
+    private static Bookstand bookstand = new Bookstand();
 
     /**
      *application starting method.
@@ -42,10 +42,10 @@ public class Main {
                     break;
                 }
 
-               case 3: { //Print the whole library
+               /*case 3: { //Print the whole library
                     printLibrary();
                     break;
-                }
+                }*/
 
                 case 0: { //Quit
                     running = false;
@@ -63,7 +63,7 @@ public class Main {
      * Prints all books on the shelf
      */
     /*When the whole table won't be filled the exception will occur
-      NullPointerException*/
+      NullPointerException
     private static void printLibrary() {
         //shelves iterator
         for (int j = 0; j < 2; j++) {
@@ -75,7 +75,7 @@ public class Main {
 
             }
         }
-    }
+    } */
 
     /**
      * Prints user menu
@@ -97,9 +97,9 @@ public class Main {
         System.out.println("Enter book index");
         int index = scanner.nextInt(); //Read book index to be printed
         //get method to allow print private fields
-        System.out.println("Author: " + shelves[shelfIndex].getBook(index).getAuthor());
-        System.out.println("Title: " + shelves[shelfIndex].getBook(index).getTitle());
-        System.out.println("Year of publish: " + shelves[shelfIndex].getBook(index).getYearOfPublish());
+        System.out.println("Author: " + bookstand.getShelf(shelfIndex).getBook(index).getAuthor());
+        System.out.println("Title: " + bookstand.getShelf(shelfIndex).getBook(index).getTitle());
+        System.out.println("Year of publish: " + bookstand.getShelf(shelfIndex).getBook(index).getYearOfPublish());
     }
     /**
      * Reads user input and adds new book
@@ -121,15 +121,17 @@ public class Main {
         //Create new book:
         Book book = new Book(author, title, year);
 
-        //Check if shelf chosen by user exists
-        if(shelves[shelfIndex] == null){
-            //Creates new shell if it doesn't exist
+        //Check if shelf already exists
+        if (bookstand.getShelf(shelfIndex) == null) {
             Shelf shelf = new Shelf();
-            //Assign local variables to global
-            shelves[shelfIndex] = shelf;
+            bookstand.setShelf(shelfIndex, shelf);
+            shelf.setBook(index, book);
+        } else {
+            bookstand.getShelf(shelfIndex).setBook(index, book);
         }
-        //If shell exists - set new book into a place chosen by user
-        shelves[shelfIndex].setBook(index, book);
+
+        }
+
     }
 
-}
+
