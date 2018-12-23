@@ -12,7 +12,7 @@ public class Main {
     /**
      * Array for all shelves
      */
-    private static Bookstand bookstand = new Bookstand();
+    private static Bookstand[] bookstands = new Bookstand[2];
 
     /**
      *application starting method.
@@ -65,13 +65,16 @@ public class Main {
     /*When the whole table won't be filled the exception will occur
       NullPointerException*/
     private static void printLibrary() {
-        //shelves iterator
-        for (int j = 0; j < 2; j++) {
-            //books iterator
-            for (int i = 0; i < 3; i++) {
-                System.out.println(bookstand.getShelf(j).getBook(i).getAuthor() +
-                        " " + bookstand.getShelf(j).getBook(i).getTitle() +
-                        " " + bookstand.getShelf(j).getBook(i).getYearOfPublish());
+        //bookstands iterator
+        for (int k = 0; k < 2; k++) {
+            //shelves iterator
+            for (int j = 0; j < 2; j++) {
+                //books iterator
+                for (int i = 0; i < 2; i++) {
+                    System.out.println(bookstands[k].getShelf(j).getBook(i).getAuthor() +
+                            " " + bookstands[k].getShelf(j).getBook(i).getTitle() +
+                            " " + bookstands[k].getShelf(j).getBook(i).getYearOfPublish());
+                }
             }
         }
     }
@@ -91,14 +94,19 @@ public class Main {
      * @param scanner scanner
      */
     private static void printBook(Scanner scanner) {
+        System.out.println("Enter bookstand index");
+        int standIndex = scanner.nextInt(); //Read bookstand index to be printed
         System.out.println("Enter shelf index");
         int shelfIndex = scanner.nextInt(); //Read shelf index to be printed
         System.out.println("Enter book index");
         int index = scanner.nextInt(); //Read book index to be printed
         //get method to allow print private fields
-        System.out.println("Author: " + bookstand.getShelf(shelfIndex).getBook(index).getAuthor());
-        System.out.println("Title: " + bookstand.getShelf(shelfIndex).getBook(index).getTitle());
-        System.out.println("Year of publish: " + bookstand.getShelf(shelfIndex).getBook(index).getYearOfPublish());
+        System.out.println("Author: "
+                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getAuthor());
+        System.out.println("Title: "
+                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getTitle());
+        System.out.println("Year of publish: "
+                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getYearOfPublish());
     }
     /**
      * Reads user input and adds new book
@@ -106,6 +114,8 @@ public class Main {
      */
     private static void addNewBook(Scanner scanner) {
         //Create local variables for author, title and year
+        System.out.println("Enter bookstand index");
+        int standIndex = scanner.nextInt();
         System.out.println("Enter shelf index");
         int shelfIndex = scanner.nextInt();
         System.out.println("Enter book index");
@@ -120,16 +130,23 @@ public class Main {
         //Create new book:
         Book book = new Book(author, title, year);
 
+        //Check if bookstand already exists
+        if(bookstands[standIndex] == null){
+            //Creates new bookstand if doesn't exist
+            Bookstand bookstand = new Bookstand();
+            //Assign local variables to global ones
+            bookstands[standIndex] = bookstand;
+        }
         //Check if shelf already exists
-        if (bookstand.getShelf(shelfIndex) == null) {
+        if (bookstands[standIndex].getShelf(shelfIndex) == null) {
             //Add new shelf if doesn't exist
             Shelf shelf = new Shelf();
             //Set new shelf and new book
-            bookstand.setShelf(shelfIndex, shelf);
+            bookstands[standIndex].setShelf(shelfIndex, shelf);
             shelf.setBook(index, book);
         } else {
             //Get shelf if already exists and set new book
-            bookstand.getShelf(shelfIndex).setBook(index, book);
+            bookstands[standIndex].getShelf(shelfIndex).setBook(index, book);
         }
 
         }

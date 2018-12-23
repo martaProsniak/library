@@ -9,7 +9,7 @@ public class Shelf {
     /**
      * Books belonging to this shelf
      */
-    private Book[] books = new Book[3];
+    private Book[] books = new Book[2];
 
     /**
      *
