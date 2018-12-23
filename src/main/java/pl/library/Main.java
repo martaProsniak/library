@@ -10,9 +10,9 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * Array for all shelves
+     * New library to store all books
      */
-    private static Bookstand[] bookstands = new Bookstand[2];
+    private static Library library = new Library();
 
     /**
      *application starting method.
@@ -71,9 +71,9 @@ public class Main {
             for (int j = 0; j < 2; j++) {
                 //books iterator
                 for (int i = 0; i < 2; i++) {
-                    System.out.println(bookstands[k].getShelf(j).getBook(i).getAuthor() +
-                            " " + bookstands[k].getShelf(j).getBook(i).getTitle() +
-                            " " + bookstands[k].getShelf(j).getBook(i).getYearOfPublish());
+                    System.out.println(library.getBookstand(k).getShelf(j).getBook(i).getAuthor() +
+                            " " + library.getBookstand(k).getShelf(j).getBook(i).getTitle() +
+                            " " + library.getBookstand(k).getShelf(j).getBook(i).getYearOfPublish());
                 }
             }
         }
@@ -102,11 +102,11 @@ public class Main {
         int index = scanner.nextInt(); //Read book index to be printed
         //get method to allow print private fields
         System.out.println("Author: "
-                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getAuthor());
+                + library.getBookstand(standIndex).getShelf(shelfIndex).getBook(index).getAuthor());
         System.out.println("Title: "
-                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getTitle());
+                + library.getBookstand(standIndex).getShelf(shelfIndex).getBook(index).getTitle());
         System.out.println("Year of publish: "
-                + bookstands[standIndex].getShelf(shelfIndex).getBook(index).getYearOfPublish());
+                + library.getBookstand(standIndex).getShelf(shelfIndex).getBook(index).getYearOfPublish());
     }
     /**
      * Reads user input and adds new book
@@ -131,22 +131,22 @@ public class Main {
         Book book = new Book(author, title, year);
 
         //Check if bookstand already exists
-        if(bookstands[standIndex] == null){
+        if(library.getBookstand(standIndex) == null){
             //Creates new bookstand if doesn't exist
             Bookstand bookstand = new Bookstand();
             //Assign local variables to global ones
-            bookstands[standIndex] = bookstand;
+            library.setBookstand(standIndex, bookstand);
         }
         //Check if shelf already exists
-        if (bookstands[standIndex].getShelf(shelfIndex) == null) {
+        if (library.getBookstand(standIndex).getShelf(shelfIndex) == null) {
             //Add new shelf if doesn't exist
             Shelf shelf = new Shelf();
             //Set new shelf and new book
-            bookstands[standIndex].setShelf(shelfIndex, shelf);
+            library.getBookstand(standIndex).setShelf(shelfIndex, shelf);
             shelf.setBook(index, book);
         } else {
             //Get shelf if already exists and set new book
-            bookstands[standIndex].getShelf(shelfIndex).setBook(index, book);
+           library.getBookstand(standIndex).getShelf(shelfIndex).setBook(index, book);
         }
 
         }
