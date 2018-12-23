@@ -12,7 +12,7 @@ public class Main {
     /**
      * Array for all books
      */
-    private static Shelf shelf = new Shelf();
+    private static Shelf[] shelves = new Shelf[2];
 
     /**
      *application starting method.
@@ -42,7 +42,7 @@ public class Main {
                     break;
                 }
 
-                case 3: { //Print the whole library
+               case 3: { //Print the whole library
                     printLibrary();
                     break;
                 }
@@ -62,13 +62,18 @@ public class Main {
     /**
      * Prints all books on the shelf
      */
-    /*When the whole table won't be filled the error will occur
-      NullPointerException */
+    /*When the whole table won't be filled the exception will occur
+      NullPointerException*/
     private static void printLibrary() {
-        for (int i = 0; i<3; i++){
-            System.out.println(shelf.getBook(i).getAuthor() +
-                    " " + shelf.getBook(i).getTitle() +
-                    " " + shelf.getBook(i).getYearOfPublish());
+        //shelves iterator
+        for (int j = 0; j < 2; j++) {
+            //books iterator
+            for (int i = 0; i < 3; i++) {
+                System.out.println(shelves[j].getBook(i).getAuthor() +
+                        " " + shelves[j].getBook(i).getTitle() +
+                        " " + shelves[j].getBook(i).getYearOfPublish());
+
+            }
         }
     }
 
@@ -82,26 +87,28 @@ public class Main {
                 "3 - print the whole library\n" +
                 "0 - quit\n");
     }
-
     /**
      * Reads user input ant prints info about chosen book
      * @param scanner scanner
      */
     private static void printBook(Scanner scanner) {
+        System.out.println("Enter shelf index");
+        int shelfIndex = scanner.nextInt(); //Read shelf index to be printed
         System.out.println("Enter book index");
         int index = scanner.nextInt(); //Read book index to be printed
         //get method to allow print private fields
-        System.out.println("Author: " + shelf.getBook(index).getAuthor());
-        System.out.println("Title: " + shelf.getBook(index).getTitle());
-        System.out.println("Year of publish: " + shelf.getBook(index).getYearOfPublish());
+        System.out.println("Author: " + shelves[shelfIndex].getBook(index).getAuthor());
+        System.out.println("Title: " + shelves[shelfIndex].getBook(index).getTitle());
+        System.out.println("Year of publish: " + shelves[shelfIndex].getBook(index).getYearOfPublish());
     }
-
     /**
      * Reads user input and adds new book
      * @param scanner scanner
      */
     private static void addNewBook(Scanner scanner) {
         //Create local variables for author, title and year
+        System.out.println("Enter shelf index");
+        int shelfIndex = scanner.nextInt();
         System.out.println("Enter book index");
         int index = scanner.nextInt();
         System.out.println("Enter book author");
@@ -114,8 +121,15 @@ public class Main {
         //Create new book:
         Book book = new Book(author, title, year);
 
-        //Assign local variables to global
-        shelf.setBook(index, book);
+        //Check if shelf chosen by user exists
+        if(shelves[shelfIndex] == null){
+            //Creates new shell if it doesn't exist
+            Shelf shelf = new Shelf();
+            //Assign local variables to global
+            shelves[shelfIndex] = shelf;
+        }
+        //If shell exists - set new book into a place chosen by user
+        shelves[shelfIndex].setBook(index, book);
     }
 
 }
