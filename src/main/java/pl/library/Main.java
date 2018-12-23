@@ -42,19 +42,19 @@ public class Main {
                     break;
                 }
 
-               /*case 3: { //Print the whole library
+               case 3: { //Print the whole library
                     printLibrary();
                     break;
-                }*/
+               }
 
-                case 0: { //Quit
+               case 0: { //Quit
                     running = false;
                     break;
-                }
+               }
 
-                default: {
+               default: {
                     printMenu();
-                }
+               }
             }
         }
     }
@@ -63,19 +63,18 @@ public class Main {
      * Prints all books on the shelf
      */
     /*When the whole table won't be filled the exception will occur
-      NullPointerException
+      NullPointerException*/
     private static void printLibrary() {
         //shelves iterator
         for (int j = 0; j < 2; j++) {
             //books iterator
             for (int i = 0; i < 3; i++) {
-                System.out.println(shelves[j].getBook(i).getAuthor() +
-                        " " + shelves[j].getBook(i).getTitle() +
-                        " " + shelves[j].getBook(i).getYearOfPublish());
-
+                System.out.println(bookstand.getShelf(j).getBook(i).getAuthor() +
+                        " " + bookstand.getShelf(j).getBook(i).getTitle() +
+                        " " + bookstand.getShelf(j).getBook(i).getYearOfPublish());
             }
         }
-    } */
+    }
 
     /**
      * Prints user menu
@@ -123,10 +122,13 @@ public class Main {
 
         //Check if shelf already exists
         if (bookstand.getShelf(shelfIndex) == null) {
+            //Add new shelf if doesn't exist
             Shelf shelf = new Shelf();
+            //Set new shelf and new book
             bookstand.setShelf(shelfIndex, shelf);
             shelf.setBook(index, book);
         } else {
+            //Get shelf if already exists and set new book
             bookstand.getShelf(shelfIndex).setBook(index, book);
         }
 
